@@ -17,7 +17,9 @@ keywords:
   - Wiki Lint
   - Token 節省
 last_updated: 2026-04-20
+last_modified_at: '2026-04-20T09:41:51+08:00'
 ---
+
 
 # Chapter 3 — L1 Wiki：DB 化知識快取與編譯器
 

@@ -18,7 +18,9 @@ keywords:
   - Redis
   - 系統架構
 last_updated: 2026-04-20
+last_modified_at: '2026-04-20T09:41:51+08:00'
 ---
+
 
 # Chapter 2 — 百原 RAG 系統總覽
 

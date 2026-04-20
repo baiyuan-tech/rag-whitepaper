@@ -17,7 +17,9 @@ keywords:
   - Cache
   - Answer Cache
 last_updated: 2026-04-20
+last_modified_at: '2026-04-20T09:41:51+08:00'
 ---
+
 
 # Chapter 5 — L1→L2 Fallback 與 Token 經濟學
 

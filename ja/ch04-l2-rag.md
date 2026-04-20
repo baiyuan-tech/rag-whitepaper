@@ -3,7 +3,9 @@ title: "第 4 章 — L2 RAG: pgvector + BM25 + RRF"
 chapter: 4
 lang: ja
 license: CC-BY-NC-4.0
+last_modified_at: '2026-04-20T09:41:51+08:00'
 ---
+
 
 # 第 4 章 — L2 RAG: pgvector + BM25 + RRF
 

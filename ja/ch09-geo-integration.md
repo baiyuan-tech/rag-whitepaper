@@ -3,7 +3,9 @@ title: "第 9 章 — 百原 GEO との統合"
 chapter: 9
 lang: ja
 license: CC-BY-NC-4.0
+last_modified_at: '2026-04-20T09:41:51+08:00'
 ---
+
 
 # 第 9 章 — 百原 GEO との統合
 

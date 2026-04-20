@@ -2,7 +2,9 @@
 title: "付録 D — 図表索引"
 lang: ja
 license: CC-BY-NC-4.0
+last_modified_at: '2026-04-20T09:41:51+08:00'
 ---
+
 
 # 付録 D — 図表索引
 
