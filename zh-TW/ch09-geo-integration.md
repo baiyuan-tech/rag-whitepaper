@@ -40,8 +40,6 @@ last_modified_at: '2026-04-20T09:41:51+08:00'
 
 百原 GEO Platform（見 [GEO 白皮書][geo-wp]）負責七維度 AI 引用率評分、AXP 影子文檔、閉環幻覺修復。RAG 負責 L1 Wiki + L2 混合檢索、多租戶知識庫。表面看是兩條產品線，但事實上**共用同一個「品牌事實」**。
 
-[geo-wp]: https://github.com/baiyuan-tech/geo-whitepaper
-
 具體共用的東西：
 
 ```mermaid
