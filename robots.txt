@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# AI crawlers — explicitly allow. This whitepaper is published for AI
+# indexing; we do NOT exclude GPTBot / ClaudeBot / PerplexityBot / etc.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://baiyuan-tech.github.io/rag-whitepaper/sitemap.xml

@@ -36,5 +36,5 @@ jobs:
             --timeout 30
             --accept 200..=299,301,302,307,308,403,429,503
             --exclude 'localhost|127\.0\.0\.1|example\.(com|org|net)|your-domain'
-            'README.md' 'zh-TW/**/*.md' 'en/**/*.md'
+            'README.md' 'zh-TW/**/*.md' 'en/**/*.md' 'ja/**/*.md'
           fail: false

@@ -1,0 +1,130 @@
+name: IndexNow URL Submission
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'zh-TW/**.md'
+      - 'en/**.md'
+      - 'ja/**.md'
+      - 'README.md'
+      - '_config.yml'
+  workflow_dispatch:
+    inputs:
+      full_resubmit:
+        description: "Resubmit ALL site URLs (use after big changes)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+env:
+  HOST: baiyuan-tech.github.io
+  SITE: https://baiyuan-tech.github.io/rag-whitepaper
+  KEY: ff5ecb88d83604ee81190cee46831c4b
+  KEY_LOCATION: https://baiyuan-tech.github.io/rag-whitepaper/ff5ecb88d83604ee81190cee46831c4b.txt
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Collect URLs to submit
+        id: urls
+        run: |
+          set -eo pipefail
+
+          full="${{ github.event.inputs.full_resubmit }}"
+          if [ "$full" = "true" ] || [ -z "$(git rev-parse HEAD~1 2>/dev/null)" ]; then
+            echo "Mode: full resubmit"
+            mapfile -t files < <(git ls-files 'zh-TW/*.md' 'en/*.md' 'ja/*.md' 'README.md')
+          else
+            echo "Mode: incremental (diff against HEAD~1)"
+            mapfile -t files < <(git diff --name-only --diff-filter=AMR HEAD~1 HEAD \
+              | grep -E '^(zh-TW|en|ja)/.*\.md$|^README\.md$' || true)
+          fi
+
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No content files changed in this push; nothing to submit."
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          urls=()
+          for f in "${files[@]}"; do
+            if [ "$f" = "README.md" ]; then
+              urls+=("${SITE}/")
+            else
+              path="${f%.md}.html"
+              urls+=("${SITE}/${path}")
+            fi
+          done
+
+          urls+=("${SITE}/sitemap.xml")
+
+          printf '%s\n' "${urls[@]}" > urls.txt
+          echo "count=${#urls[@]}" >> "$GITHUB_OUTPUT"
+          echo "Collected ${#urls[@]} URL(s):"
+          cat urls.txt
+
+      - name: Submit to IndexNow API
+        if: steps.urls.outputs.count != '0'
+        run: |
+          set -eo pipefail
+          payload=$(jq -n \
+            --arg host "$HOST" \
+            --arg key "$KEY" \
+            --arg keyLoc "$KEY_LOCATION" \
+            --rawfile urls urls.txt \
+            '{
+              host: $host,
+              key: $key,
+              keyLocation: $keyLoc,
+              urlList: ($urls | split("\n") | map(select(length > 0)))
+            }')
+          echo "Payload:"
+          echo "$payload"
+
+          http_code=$(curl -sS -o response.txt -w '%{http_code}' \
+            -X POST 'https://api.indexnow.org/IndexNow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data-binary "$payload")
+
+          echo "HTTP $http_code"
+          echo "--- response body ---"
+          cat response.txt
+          echo "---"
+
+          case "$http_code" in
+            200|202) echo "Success" ;;
+            *)
+              echo "::error::IndexNow rejected submission (HTTP $http_code)"
+              exit 1
+              ;;
+          esac
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## IndexNow Submission"
+            echo ""
+            echo "- Host: \`$HOST\`"
+            echo "- Key file: $KEY_LOCATION"
+            echo "- URLs submitted: ${{ steps.urls.outputs.count }}"
+            echo ""
+            if [ -f urls.txt ]; then
+              echo "### URLs"
+              echo '```'
+              cat urls.txt
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

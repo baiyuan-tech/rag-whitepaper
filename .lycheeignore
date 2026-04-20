@@ -1,0 +1,13 @@
+# URLs that lychee should skip entirely.
+# Patterns here are Rust regex against the full URL.
+
+# Internal / dev-only domains that won't resolve publicly yet.
+^https?://(localhost|127\.0\.0\.1)
+^https?://([a-z0-9-]+\.)?example\.(com|org|net)
+^https?://your-domain\.
+
+# Google Search Central help pages (often 302-chain and rate-limit aggressive bots)
+^https://developers\.google\.com/search/docs
+
+# orcid placeholder (when ORCID is registered we'll remove this)
+^https://orcid\.org/0000-0000-0000-0000

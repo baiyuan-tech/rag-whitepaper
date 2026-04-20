@@ -1,0 +1,32 @@
+---
+title: "百原 RAG ナレッジプラットフォーム 技術ホワイトペーパー"
+subtitle: "マルチテナント AI SaaS のための L1 Wiki + L2 RAG 混合検索"
+author: "Vincent Lin（百原科技）"
+date: "2026-04-20"
+lang: ja
+toc-title: "目次"
+abstract-title: "概要"
+reference-section-title: "参考資料"
+abstract: |
+  本書は百原科技が 2024–2026 年に開発した「百原 RAG ナレッジプラットフォーム」の
+  エンジニアリング実践を記録する。マルチテナント型の知識検索インフラとして、
+  百原 AI カスタマーサービス SaaS、百原 GEO Platform、百原 PIF AI の 3 製品を
+  共通で支える。L1 Wiki（DB キャッシュ済み要約） + L2 RAG（pgvector + BM25 + RRF
+  混合検索）の二層アーキテクチャ、GEO および PIF との深い統合パターン、三層
+  テナント分離、ストリーミング応答、人間オペレータへの Handoff ループを詳述する。
+  CC BY-NC 4.0 ライセンス。
+keywords:
+  - Retrieval Augmented Generation
+  - RAG
+  - L1 Wiki
+  - L2 RAG
+  - pgvector
+  - BM25
+  - RRF
+  - Multi-Tenant SaaS
+  - PostgreSQL
+  - Hallucination Detection
+  - GEO
+  - PIF
+rights: "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)"
+---

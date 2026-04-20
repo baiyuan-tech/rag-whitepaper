@@ -1,0 +1,310 @@
+name: Build Whitepaper PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'zh-TW/**'
+      - 'en/**'
+      - 'ja/**'
+      - 'README.md'
+      - 'assets/pdf/**'
+      - '.github/workflows/build-pdf.yml'
+  pull_request:
+    paths:
+      - 'zh-TW/**'
+      - 'en/**'
+      - 'ja/**'
+      - 'assets/pdf/**'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-zh-TW:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XeLaTeX + CJK fonts + Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex texlive-lang-chinese texlive-fonts-recommended \
+            texlive-latex-extra texlive-latex-recommended \
+            lmodern \
+            fonts-noto-cjk fonts-noto-cjk-extra \
+            fonts-noto-color-emoji pandoc librsvg2-bin
+          sudo fc-cache -fv > /dev/null
+
+      - name: Verify CJK font + xeCJK + lmodern presence (hard assert)
+        run: |
+          pandoc --version | head -2
+          xelatex --version | head -1
+          fc-list :lang=zh-tw | grep -qi noto || { echo "FATAL: no Noto CJK zh-tw" >&2; exit 1; }
+          kpsewhich xeCJK.sty > /dev/null || { echo "FATAL: xeCJK.sty missing" >&2; exit 1; }
+          kpsewhich lmodern.sty > /dev/null || { echo "FATAL: lmodern.sty missing" >&2; exit 1; }
+          echo "Prerequisites OK."
+
+      - name: Concatenate Markdown chapters
+        run: |
+          chmod +x assets/pdf/concat.sh
+          bash assets/pdf/concat.sh zh-TW > whitepaper-zh-TW.md
+          wc -l whitepaper-zh-TW.md
+
+      - name: Preprocess for XeLaTeX compatibility
+        run: |
+          python3 <<'PY'
+          import re
+          p = 'whitepaper-zh-TW.md'
+          text = open(p, 'r', encoding='utf-8').read()
+
+          text = re.sub(
+            r'```mermaid\s*\n.*?\n```',
+            '*[Mermaid diagram — see web version on GitHub]*',
+            text, flags=re.DOTALL,
+          )
+
+          emoji_ranges = (
+            (0x1F300, 0x1F64F), (0x1F680, 0x1F6FF), (0x1F700, 0x1F77F),
+            (0x1F780, 0x1F7FF), (0x1F800, 0x1F8FF), (0x1F900, 0x1F9FF),
+            (0x1FA00, 0x1FA6F), (0x1FA70, 0x1FAFF), (0x2600, 0x26FF),
+            (0x2700, 0x27BF), (0x1F1E6, 0x1F1FF),
+          )
+          def is_emoji(cp):
+              return any(lo <= cp <= hi for lo, hi in emoji_ranges)
+          text = ''.join('' if is_emoji(ord(c)) else c for c in text)
+          text = text.replace('\uFE0F', '').replace('\uFE0E', '').replace('\u200D', '')
+
+          open(p, 'w', encoding='utf-8').write(text)
+          print(f'[preprocess] {len(text)} chars after cleanup')
+          PY
+
+      - name: Build PDF via Pandoc + XeLaTeX
+        id: pandoc
+        run: |
+          set -eo pipefail
+          pandoc whitepaper-zh-TW.md \
+            --pdf-engine=xelatex \
+            --verbose \
+            --metadata-file=assets/pdf/metadata-zh-TW.yaml \
+            --toc --toc-depth=3 \
+            --number-sections \
+            --highlight-style=tango \
+            -V documentclass=report \
+            -V CJKmainfont="Noto Serif CJK TC" \
+            -V CJKsansfont="Noto Sans CJK TC" \
+            -V CJKmonofont="Noto Sans CJK TC" \
+            -V geometry:a4paper \
+            -V geometry:margin=2.5cm \
+            -V colorlinks=true \
+            -V linkcolor=teal \
+            -V urlcolor=blue \
+            -V toccolor=black \
+            -V lang=zh-TW \
+            -o whitepaper-zh-TW.pdf 2>&1 | tee build.log
+          ls -la whitepaper-zh-TW.pdf
+
+      - name: Surface pandoc error
+        if: always()
+        run: |
+          if [ -f build.log ]; then
+            err_line=$(grep -m1 -E '^! |^Error producing PDF|fontspec Error' build.log || true)
+            if [ -z "$err_line" ]; then
+              err_line=$(tail -30 build.log | grep -v '^$' | tail -3 | tr '\n' ' | ')
+            fi
+            msg=$(printf '%s' "$err_line" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/:/%3A/g')
+            echo "::error title=Pandoc PDF build failure (zh-TW)::${msg:0:500}"
+            {
+              echo "## Pandoc Build Log (zh-TW)"
+              echo '```'
+              tail -300 build.log
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: whitepaper-zh-TW
+          path: |
+            whitepaper-zh-TW.pdf
+            whitepaper-zh-TW.md
+            build.log
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Attach PDF to v1.0-draft Release
+        if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0-draft
+          files: whitepaper-zh-TW.pdf
+          fail_on_unmatched_files: true
+
+  build-en:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XeLaTeX + Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex texlive-fonts-recommended \
+            texlive-latex-extra texlive-latex-recommended \
+            lmodern \
+            fonts-noto-color-emoji pandoc librsvg2-bin
+          sudo fc-cache -fv > /dev/null
+
+      - name: Concatenate Markdown chapters
+        run: |
+          chmod +x assets/pdf/concat.sh
+          bash assets/pdf/concat.sh en > whitepaper-en.md
+          wc -l whitepaper-en.md
+
+      - name: Preprocess for XeLaTeX compatibility
+        run: |
+          python3 <<'PY'
+          import re
+          p = 'whitepaper-en.md'
+          text = open(p, 'r', encoding='utf-8').read()
+          text = re.sub(
+            r'```mermaid\s*\n.*?\n```',
+            '*[Mermaid diagram — see web version on GitHub]*',
+            text, flags=re.DOTALL,
+          )
+          emoji_ranges = (
+            (0x1F300, 0x1F64F), (0x1F680, 0x1F6FF), (0x1F700, 0x1F77F),
+            (0x1F780, 0x1F7FF), (0x1F800, 0x1F8FF), (0x1F900, 0x1F9FF),
+            (0x1FA00, 0x1FA6F), (0x1FA70, 0x1FAFF), (0x2600, 0x26FF),
+            (0x2700, 0x27BF), (0x1F1E6, 0x1F1FF),
+          )
+          def is_emoji(cp):
+              return any(lo <= cp <= hi for lo, hi in emoji_ranges)
+          text = ''.join('' if is_emoji(ord(c)) else c for c in text)
+          text = text.replace('\uFE0F', '').replace('\uFE0E', '').replace('\u200D', '')
+          open(p, 'w', encoding='utf-8').write(text)
+          PY
+
+      - name: Build PDF
+        run: |
+          set -eo pipefail
+          pandoc whitepaper-en.md \
+            --pdf-engine=xelatex \
+            --metadata-file=assets/pdf/metadata-en.yaml \
+            --toc --toc-depth=3 --number-sections \
+            --highlight-style=tango \
+            -V documentclass=report \
+            -V geometry:a4paper -V geometry:margin=2.5cm \
+            -V colorlinks=true -V linkcolor=teal -V urlcolor=blue \
+            -V lang=en \
+            -o whitepaper-en.pdf 2>&1 | tee build.log
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: whitepaper-en
+          path: |
+            whitepaper-en.pdf
+            whitepaper-en.md
+            build.log
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Attach PDF to v1.0-draft Release
+        if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0-draft
+          files: whitepaper-en.pdf
+          fail_on_unmatched_files: true
+
+  build-ja:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XeLaTeX + Japanese CJK fonts + Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex texlive-lang-chinese texlive-lang-japanese \
+            texlive-fonts-recommended \
+            texlive-latex-extra texlive-latex-recommended \
+            lmodern \
+            fonts-noto-cjk fonts-noto-cjk-extra \
+            fonts-noto-color-emoji pandoc librsvg2-bin
+          sudo fc-cache -fv > /dev/null
+
+      - name: Concatenate Markdown chapters
+        run: |
+          chmod +x assets/pdf/concat.sh
+          bash assets/pdf/concat.sh ja > whitepaper-ja.md
+          wc -l whitepaper-ja.md
+
+      - name: Preprocess for XeLaTeX compatibility
+        run: |
+          python3 <<'PY'
+          import re
+          p = 'whitepaper-ja.md'
+          text = open(p, 'r', encoding='utf-8').read()
+          text = re.sub(
+            r'```mermaid\s*\n.*?\n```',
+            '*[Mermaid ダイアグラム — GitHub の Web 版を参照]*',
+            text, flags=re.DOTALL,
+          )
+          emoji_ranges = (
+            (0x1F300, 0x1F64F), (0x1F680, 0x1F6FF), (0x1F700, 0x1F77F),
+            (0x1F780, 0x1F7FF), (0x1F800, 0x1F8FF), (0x1F900, 0x1F9FF),
+            (0x1FA00, 0x1FA6F), (0x1FA70, 0x1FAFF), (0x2600, 0x26FF),
+            (0x2700, 0x27BF), (0x1F1E6, 0x1F1FF),
+          )
+          def is_emoji(cp):
+              return any(lo <= cp <= hi for lo, hi in emoji_ranges)
+          text = ''.join('' if is_emoji(ord(c)) else c for c in text)
+          text = text.replace('\uFE0F', '').replace('\uFE0E', '').replace('\u200D', '')
+          open(p, 'w', encoding='utf-8').write(text)
+          PY
+
+      - name: Build PDF
+        run: |
+          set -eo pipefail
+          pandoc whitepaper-ja.md \
+            --pdf-engine=xelatex \
+            --metadata-file=assets/pdf/metadata-ja.yaml \
+            --toc --toc-depth=3 --number-sections \
+            --highlight-style=tango \
+            -V documentclass=report \
+            -V CJKmainfont="Noto Serif CJK JP" \
+            -V CJKsansfont="Noto Sans CJK JP" \
+            -V CJKmonofont="Noto Sans CJK JP" \
+            -V geometry:a4paper -V geometry:margin=2.5cm \
+            -V colorlinks=true -V linkcolor=teal -V urlcolor=blue \
+            -V lang=ja \
+            -o whitepaper-ja.pdf 2>&1 | tee build.log
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: whitepaper-ja
+          path: |
+            whitepaper-ja.pdf
+            whitepaper-ja.md
+            build.log
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Attach PDF to v1.0-draft Release
+        if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0-draft
+          files: whitepaper-ja.pdf
+          fail_on_unmatched_files: true

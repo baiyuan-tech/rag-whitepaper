@@ -1,0 +1,34 @@
+---
+title: "百原 RAG 知識庫平台 技術白皮書"
+subtitle: "多租戶 AI SaaS 的 L1 Wiki + L2 RAG 雙層檢索工程實踐"
+author: "Vincent Lin（百原科技）"
+date: "2026-04-20"
+lang: zh-Hant-TW
+toc-title: "目錄"
+abstract-title: "摘要"
+reference-section-title: "參考資料"
+lof-title: "圖目錄"
+lot-title: "表目錄"
+abstract: |
+  本書記錄百原科技於 2024–2026 年開發「百原 RAG 知識庫平台」的工程實踐。
+  本平台是一套多租戶知識檢索基礎設施，同時為百原 AI 客服 SaaS、百原 GEO
+  Platform、百原 PIF AI 三條產品線提供知識支撐。全書介紹 L1 Wiki + L2 RAG
+  雙層檢索架構（L1 為 DB 化快取摘要、L2 為 pgvector + BM25 + Reciprocal Rank
+  Fusion 混合檢索），深入拆解與 GEO Platform、PIF AI 的整合模式，並記錄三層
+  租戶隔離、串流應答、Handoff 閉環等工程決策。採 CC BY-NC 4.0 授權公開。
+keywords:
+  - Retrieval Augmented Generation
+  - RAG
+  - L1 Wiki
+  - L2 RAG
+  - pgvector
+  - BM25
+  - RRF
+  - Multi-Tenant SaaS
+  - PostgreSQL
+  - Row-Level Security
+  - Hallucination Detection
+  - GEO Platform
+  - PIF AI
+rights: "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)"
+---

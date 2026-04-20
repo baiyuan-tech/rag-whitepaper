@@ -1,0 +1,119 @@
+name: Update sitemap lastmod from git history
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'zh-TW/**.md'
+      - 'en/**.md'
+      - 'ja/**.md'
+      - 'README.md'
+      - '.github/workflows/update-sitemap-lastmod.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lastmod
+  cancel-in-progress: false
+
+jobs:
+  update-lastmod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install ruamel.yaml
+        run: pip install 'ruamel.yaml>=0.18'
+
+      - name: Update last_modified_at via YAML round-trip
+        run: |
+          python3 <<'PY'
+          import pathlib, subprocess
+          from ruamel.yaml import YAML
+
+          yaml = YAML(typ='rt')
+          yaml.indent(mapping=2, sequence=4, offset=2)
+          yaml.width = 4096
+          yaml.preserve_quotes = True
+
+          roots = ['zh-TW', 'en', 'ja', 'README.md']
+          changed = []
+
+          def files():
+              for r in roots:
+                  p = pathlib.Path(r)
+                  if p.is_file() and p.suffix == '.md':
+                      yield p
+                  elif p.is_dir():
+                      for f in p.rglob('*.md'):
+                          yield f
+
+          for f in files():
+              ts = subprocess.run(
+                  ['git', 'log', '-1', '--format=%cI', '--', str(f)],
+                  capture_output=True, text=True, check=True,
+              ).stdout.strip()
+              if not ts:
+                  continue
+
+              text = f.read_text(encoding='utf-8')
+              if not text.startswith('---\n'):
+                  continue
+
+              try:
+                  end = text.index('\n---\n', 4)
+              except ValueError:
+                  print(f'[skip] {f}: no closing frontmatter')
+                  continue
+
+              fm_text = text[4:end]
+              body = text[end + 4:]
+
+              try:
+                  import io
+                  data = yaml.load(io.StringIO(fm_text))
+              except Exception as e:
+                  print(f'[skip] {f}: YAML parse error: {e}')
+                  continue
+
+              if data is None:
+                  continue
+
+              data.pop('sitemap', None)
+
+              current = data.get('last_modified_at')
+              if str(current).strip() == ts:
+                  print(f'[same] {f}')
+                  continue
+
+              data['last_modified_at'] = ts
+
+              out = io.StringIO()
+              yaml.dump(data, out)
+              new_fm = out.getvalue()
+
+              new_text = '---\n' + new_fm + '---\n' + body
+              f.write_text(new_text, encoding='utf-8')
+              changed.append(str(f))
+              print(f'[set]  {f}  last_modified_at: {ts}')
+
+          print(f'\nTotal updated: {len(changed)}')
+          PY
+
+      - name: Commit changes (if any)
+        run: |
+          if ! git diff --quiet; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore(sitemap): update last_modified_at from git history [skip ci]" \
+                       -m "Auto-updated by .github/workflows/update-sitemap-lastmod.yml"
+            git push
+          else
+            echo "No frontmatter changes needed."
+          fi

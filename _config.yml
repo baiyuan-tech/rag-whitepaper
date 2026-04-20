@@ -1,0 +1,70 @@
+# Jekyll config for GitHub Pages — https://baiyuan-tech.github.io/rag-whitepaper/
+
+title: "Baiyuan RAG Knowledge Platform Whitepaper"
+description: >-
+  A technical whitepaper on L1 Wiki + L2 RAG hybrid retrieval for
+  multi-tenant AI SaaS. Covers DB-cached LLM-compiled Wiki layer,
+  pgvector + BM25 + RRF retrieval, three-layer tenant isolation, and
+  deep integration with Baiyuan GEO Platform and PIF AI.
+url: "https://baiyuan-tech.github.io"
+baseurl: "/rag-whitepaper"
+lang: zh-TW
+
+author:
+  name: Vincent Lin
+  email: services@baiyuan.io
+
+social:
+  name: Baiyuan Technology
+  links:
+    - https://baiyuan.io
+    - https://rag.baiyuan.io
+    - https://geo.baiyuan.io
+    - https://pif.baiyuan.io
+    - https://www.linkedin.com/company/112980572
+    - https://github.com/baiyuan-tech
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-redirect-from
+
+exclude:
+  - CITATION.cff
+  - LICENSE
+  - FORMAT.md
+  - Gemfile
+  - Gemfile.lock
+  - .github
+  - .markdownlint.jsonc
+  - .lycheeignore
+  - assets/pdf
+  - assets/social
+  - node_modules
+  - vendor
+  - '*.pdf'
+  - README.original.md
+
+defaults:
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false
+  - scope:
+      path: "google*.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "[a-f0-9]*.txt"
+    values:
+      sitemap: false
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  auto_ids: true
+  toc_levels: 2..4
+
+permalink: /:path/:basename:output_ext
