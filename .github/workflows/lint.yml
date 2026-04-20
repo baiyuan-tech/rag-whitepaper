@@ -1,0 +1,40 @@
+name: Markdown Lint & Link Check
+
+on:
+  push:
+    branches: [main]
+    paths: ['**.md', '.markdownlint.jsonc', '.lycheeignore', '.github/workflows/lint.yml']
+  pull_request:
+    paths: ['**.md', '.markdownlint.jsonc', '.lycheeignore', '.github/workflows/lint.yml']
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: '**/*.md'
+          config: '.markdownlint.jsonc'
+
+  link-check:
+    runs-on: ubuntu-latest
+    # Don't fail CI on link-check — external link health is volatile.
+    # The report is still visible in Actions output for maintainers to review.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --exclude-path .git
+            --exclude-mail
+            --max-retries 2
+            --retry-wait-time 5
+            --timeout 30
+            --accept 200..=299,301,302,307,308,403,429,503
+            --exclude 'localhost|127\.0\.0\.1|example\.(com|org|net)|your-domain'
+            'README.md' 'zh-TW/**/*.md' 'en/**/*.md'
+          fail: false

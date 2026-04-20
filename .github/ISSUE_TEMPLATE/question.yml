@@ -1,0 +1,22 @@
+name: 技術討論 / Technical Question
+description: 針對書中內容、設計取捨、實作細節的公開討論
+title: "[question] "
+labels: ["question"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: 相關章節（如有）
+      placeholder: "Ch X, §X.Y"
+  - type: textarea
+    id: question
+    attributes:
+      label: 問題
+      description: 描述您想討論的問題或觀點
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 背景
+      description: 您的使用情境、既有做法、已嘗試的方案（選填）

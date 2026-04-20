@@ -1,0 +1,70 @@
+cff-version: 1.2.0
+message: "If you use this whitepaper in research, articles, or product design, please cite it as below. / 若您於研究、文章、產品設計中引用本書，請依以下格式。"
+title: "Baiyuan RAG Knowledge Platform: A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS"
+abstract: >-
+  A technical whitepaper documenting the engineering practice of building
+  Baiyuan RAG Knowledge Platform (2024-2026), a multi-tenant knowledge
+  retrieval infrastructure powering Baiyuan's AI Customer Service SaaS.
+  Introduces a two-layer retrieval architecture (L1 Wiki DB-cached summaries
+  + L2 vector + BM25 + RRF), deep integration patterns with Baiyuan GEO
+  Platform and PIF AI (Product Information File automation for cosmetics
+  regulatory compliance), three-layer tenant isolation, and a streaming
+  handoff protocol. Published in Traditional Chinese, English, and Japanese.
+type: software
+authors:
+  - family-names: Lin
+    given-names: Vincent
+    email: services@baiyuan.io
+    affiliation: "Baiyuan Technology"
+    website: https://baiyuan.io
+version: "1.0-draft"
+date-released: 2026-04-20
+url: "https://github.com/baiyuan-tech/rag-whitepaper"
+repository-code: "https://github.com/baiyuan-tech/rag-whitepaper"
+license: CC-BY-NC-4.0
+keywords:
+  - RAG
+  - Retrieval Augmented Generation
+  - L1 Wiki
+  - L2 RAG
+  - Hybrid Retrieval
+  - pgvector
+  - BM25
+  - RRF
+  - Reciprocal Rank Fusion
+  - Multi-Tenant SaaS
+  - PostgreSQL
+  - Row-Level Security
+  - NLI
+  - Hallucination
+  - Knowledge Base
+  - GEO
+  - PIF
+  - AI Customer Service
+identifiers:
+  - type: url
+    value: "https://github.com/baiyuan-tech/rag-whitepaper"
+    description: "GitHub repository"
+  - type: url
+    value: "https://rag.baiyuan.io"
+    description: "Product website (RAG Engine)"
+  - type: url
+    value: "https://geo.baiyuan.io"
+    description: "Sister product — GEO Platform"
+  - type: url
+    value: "https://pif.baiyuan.io"
+    description: "Sister product — PIF AI"
+preferred-citation:
+  type: generic
+  title: "Baiyuan RAG Knowledge Platform: A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS"
+  authors:
+    - family-names: Lin
+      given-names: Vincent
+      affiliation: "Baiyuan Technology"
+  institution:
+    name: "Baiyuan Technology"
+    website: "https://baiyuan.io"
+  year: 2026
+  month: 4
+  url: "https://github.com/baiyuan-tech/rag-whitepaper"
+  version: "1.0-draft"

@@ -1,0 +1,38 @@
+name: 勘誤 / Errata
+description: 回報書中事實錯誤、引用錯誤、數據錯誤
+title: "[errata] "
+labels: ["errata", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感謝您為本書把關。勘誤一經確認，將列入下一版修訂記錄並署名感謝。
+  - type: input
+    id: location
+    attributes:
+      label: 章節與段落
+      description: 例如 "Ch 3, §3.2.1, 第 3 段"
+      placeholder: "Ch X, §X.Y.Z, 第 N 段"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 現行內容
+      description: 請貼上有問題的原文
+    validations:
+      required: true
+  - type: textarea
+    id: suggested
+    attributes:
+      label: 建議修正
+      description: 您認為正確的版本
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 佐證來源
+      description: 請提供可驗證的參考資料（URL / 論文 DOI / 官方文件）
+    validations:
+      required: true
