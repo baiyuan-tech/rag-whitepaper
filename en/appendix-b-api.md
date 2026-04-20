@@ -2,8 +2,9 @@
 title: "Appendix B — Public API Specification"
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-20T09:41:51+08:00'
+last_modified_at: '2026-04-20T09:10:35Z'
 ---
+
 
 
 # Appendix B — Public API Specification

@@ -17,8 +17,9 @@ keywords:
   - Document Processing
   - Queue
 last_updated: 2026-04-20
-last_modified_at: '2026-04-20T09:41:51+08:00'
+last_modified_at: '2026-04-20T09:10:35Z'
 ---
+
 
 
 # Chapter 7 — 知識攝取管線

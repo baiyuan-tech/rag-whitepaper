@@ -16,8 +16,9 @@ keywords:
   - 多模態
   - 長文
 last_updated: 2026-04-20
-last_modified_at: '2026-04-20T09:41:51+08:00'
+last_modified_at: '2026-04-20T09:10:35Z'
 ---
+
 
 
 # Chapter 12 — 限制、未解問題與未來工作
