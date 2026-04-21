@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Root / Index -->
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ── zh-TW ── -->
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch01-dark-forest.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch01-dark-forest.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch01-dark-forest.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch01-dark-forest.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch02-system-overview.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch02-system-overview.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch02-system-overview.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch02-system-overview.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch03-l1-wiki.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch03-l1-wiki.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch03-l1-wiki.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch03-l1-wiki.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch04-l2-rag.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch04-l2-rag.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch04-l2-rag.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch04-l2-rag.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch05-fallback-economics.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch05-fallback-economics.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch05-fallback-economics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch05-fallback-economics.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch06-tenant-isolation.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch06-tenant-isolation.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch06-tenant-isolation.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch06-tenant-isolation.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch07-ingestion.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch07-ingestion.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch07-ingestion.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch07-ingestion.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch08-stream-handoff.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch08-stream-handoff.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch08-stream-handoff.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch08-stream-handoff.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch09-geo-integration.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch09-geo-integration.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch09-geo-integration.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch09-geo-integration.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch10-pif-integration.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch10-pif-integration.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch10-pif-integration.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch10-pif-integration.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch11-case-studies.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch11-case-studies.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch11-case-studies.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch11-case-studies.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch12-limitations.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch12-limitations.html"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://baiyuan-tech.github.io/rag-whitepaper/en/ch12-limitations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja"    href="https://baiyuan-tech.github.io/rag-whitepaper/ja/ch12-limitations.html"/>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-a-glossary.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-b-api.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-c-references.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-d-figures.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ── en ── -->
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch01-dark-forest.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch02-system-overview.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch03-l1-wiki.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch04-l2-rag.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch05-fallback-economics.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch06-tenant-isolation.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch07-ingestion.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch08-stream-handoff.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch09-geo-integration.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch10-pif-integration.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch11-case-studies.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/ch12-limitations.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-a-glossary.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-b-api.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-c-references.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-d-figures.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ── ja ── -->
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch01-dark-forest.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch02-system-overview.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch03-l1-wiki.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch04-l2-rag.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch05-fallback-economics.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch06-tenant-isolation.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch07-ingestion.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch08-stream-handoff.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch09-geo-integration.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch10-pif-integration.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch11-case-studies.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/ch12-limitations.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-a-glossary.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-b-api.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-c-references.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-d-figures.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
