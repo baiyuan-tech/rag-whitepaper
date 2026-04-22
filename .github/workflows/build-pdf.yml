@@ -27,7 +27,7 @@ jobs:
   build-zh-TW:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install XeLaTeX + CJK fonts + Pandoc
         run: |
@@ -78,6 +78,8 @@ jobs:
               return any(lo <= cp <= hi for lo, hi in emoji_ranges)
           text = ''.join('' if is_emoji(ord(c)) else c for c in text)
           text = text.replace('\uFE0F', '').replace('\uFE0E', '').replace('\u200D', '')
+          # Body font (lmroman10) lacks these glyphs — substitute ASCII fallbacks for PDF
+          text = text.replace('\u2194', ' <-> ').replace('\u2260', ' != ')
 
           open(p, 'w', encoding='utf-8').write(text)
           print(f'[preprocess] {len(text)} chars after cleanup')
@@ -128,7 +130,7 @@ jobs:
 
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: whitepaper-zh-TW
           path: |
@@ -140,7 +142,7 @@ jobs:
 
       - name: Attach PDF to v1.0-draft Release
         if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v1.0-draft
           files: whitepaper-zh-TW.pdf
@@ -149,7 +151,7 @@ jobs:
   build-en:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install XeLaTeX + Pandoc
         run: |
@@ -188,6 +190,8 @@ jobs:
               return any(lo <= cp <= hi for lo, hi in emoji_ranges)
           text = ''.join('' if is_emoji(ord(c)) else c for c in text)
           text = text.replace('\uFE0F', '').replace('\uFE0E', '').replace('\u200D', '')
+          # Body font (lmroman10) lacks these glyphs — substitute ASCII fallbacks for PDF
+          text = text.replace('\u2194', ' <-> ').replace('\u2260', ' != ')
           open(p, 'w', encoding='utf-8').write(text)
           PY
 
@@ -207,7 +211,7 @@ jobs:
 
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: whitepaper-en
           path: |
@@ -219,7 +223,7 @@ jobs:
 
       - name: Attach PDF to v1.0-draft Release
         if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v1.0-draft
           files: whitepaper-en.pdf
@@ -228,7 +232,7 @@ jobs:
   build-ja:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install XeLaTeX + Japanese CJK fonts + Pandoc
         run: |
@@ -269,6 +273,8 @@ jobs:
               return any(lo <= cp <= hi for lo, hi in emoji_ranges)
           text = ''.join('' if is_emoji(ord(c)) else c for c in text)
           text = text.replace('\uFE0F', '').replace('\uFE0E', '').replace('\u200D', '')
+          # Body font (lmroman10) lacks these glyphs — substitute ASCII fallbacks for PDF
+          text = text.replace('\u2194', ' <-> ').replace('\u2260', ' != ')
           open(p, 'w', encoding='utf-8').write(text)
           PY
 
@@ -291,7 +297,7 @@ jobs:
 
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: whitepaper-ja
           path: |
@@ -303,7 +309,7 @@ jobs:
 
       - name: Attach PDF to v1.0-draft Release
         if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v1.0-draft
           files: whitepaper-ja.pdf
