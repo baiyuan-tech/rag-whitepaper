@@ -127,6 +127,71 @@ Every choice is a trade-off. Ch 12 revisits which may need revision.
 
 ---
 
+## 2.7 Widget Edge Distribution and Cache Strategy
+
+The Chat Widget for the AI Customer Service line is a ~35KB JavaScript bundle embedded on every page of **customer** websites. At scale (100 tenants × 10K daily page views), this yields **~1M widget loads per day**. Serving each hit from the Lightsail origin nginx would make it the platform's first bottleneck.
+
+The platform uses a two-tier cache architecture — **origin + CDN edge** — so that end-user requests almost never reach origin.
+
+### 2.7.1 Delivery Path
+
+```mermaid
+flowchart LR
+    Browser[Customer Browser<br/>1-day cache]
+    Edge[Cloudflare Edge<br/>300+ PoP / 1-year cache]
+    Nginx[Origin nginx<br/>Lightsail]
+    FS[/usr/share/nginx/<br/>html/widget/]
+    Browser -- MISS --> Edge
+    Edge -- MISS --> Nginx
+    Nginx -- alias --> FS
+```
+
+Best case: browser cache serves instantly (< 10ms). Cold start: CF edge returns in < 60ms TTFB from the Taipei PoP. Worst case: the first request in a region pays one origin round-trip, after which the regional PoP serves subsequent hits.
+
+### 2.7.2 Cache Headers
+
+Origin nginx returns for `/widget/*`:
+
+```http
+Cache-Control: public, max-age=86400, s-maxage=31536000, immutable
+Access-Control-Allow-Origin: *
+```
+
+| Directive | Audience | Meaning | Rationale |
+|-----------|----------|---------|-----------|
+| `max-age=86400` | Browser | Revalidate after 1 day | Support rapid bug-fix rollout |
+| `s-maxage=31536000` | Shared CDN | 1 year | Edge HIT rate → 100%, origin rarely fetched |
+| `immutable` | Browser | No revalidation during TTL | Skip conditional GET, cut RTT |
+
+A Cloudflare Cache Rule overrides edge TTL to 1 year (`Override origin → 1 year`), guaranteeing long edge retention even on the Free plan.
+
+### 2.7.3 CORS and Versioning
+
+The widget loads cross-origin, so `Access-Control-Allow-Origin: *` is required. This is a **public** resource — no secrets — and tenant identity is passed at runtime via `window.BAIYUAN_WIDGET.tenantKey`.
+
+Current strategy: **versionless URL + short browser TTL**.
+
+- ✅ Upside: one URL forever; customers never re-edit their embed snippet
+- ❌ Downside: after a bug fix, clients see the new version only after the 1-day browser TTL
+- 🔄 Upgrade path: switch to `chat-widget.v{SEMVER}.js` and extend browser TTL to 1 year
+
+### 2.7.4 Invalidation and Purge
+
+- **Browser**: change the URL (version bump) → fresh fetch; or wait for `max-age`
+- **CF edge**: Dashboard → Caching → Purge Everything / Custom Purge (by URL); or CF API for automation
+- **Origin**: file at `/home/ubuntu/cs-widget/dist/`, mounted read-only into nginx; `docker compose up -d --no-deps nginx` hot-reloads
+
+### 2.7.5 Measured Performance
+
+| Metric | Value (Taipei PoP, CF HIT) |
+|--------|-------|
+| TTFB | < 60ms |
+| Total | < 70ms |
+| Origin fetch rate | < 0.1% |
+| Edge HIT rate | > 99.9% |
+
+---
+
 ## Key Takeaways
 
 - System = PG + pgvector + Redis + Node.js + L1/L2 Hybrid
@@ -134,6 +199,7 @@ Every choice is a trade-off. Ch 12 revisits which may need revision.
 - All tenant tables use RLS, the first line of multi-tenant safety
 - Three product lines deliberately share the platform
 - Choices like pgvector / RRF / Node.js are trade-offs, not ideals
+- The Chat Widget is delivered via a two-tier cache (origin nginx + Cloudflare edge), achieving < 60ms TTFB and < 0.1% origin fetch rate
 
 ## References
 

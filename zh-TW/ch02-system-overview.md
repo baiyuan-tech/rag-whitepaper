@@ -35,6 +35,7 @@ last_modified_at: '2026-04-20T09:10:35Z'
 - [2.4 組件分工](#24-組件分工)
 - [2.5 三條產品線的共用點](#25-三條產品線的共用點)
 - [2.6 技術選型決策表](#26-技術選型決策表)
+- [2.7 Widget 邊緣分發與快取策略](#27-widget-邊緣分發與快取策略)
 
 ---
 
@@ -199,6 +200,71 @@ flowchart TB
 
 ---
 
+## 2.7 Widget 邊緣分發與快取策略
+
+AI 客服產品線的 Chat Widget 是一段約 35KB 的 JavaScript 檔，嵌入到**客戶**網站的每一個頁面。當平台上有 100 位租戶 × 每租戶網站日均 10,000 PV，等於**每天 100 萬次**載入請求。若全部回源到 Lightsail 上的 nginx，原始伺服器會成為整個平台的第一個流量瓶頸。
+
+本平台採「**origin + CDN edge**」二層快取架構，使終端請求幾乎不回源。
+
+### 2.7.1 檔案交付路徑
+
+```mermaid
+flowchart LR
+    Browser[客戶瀏覽器<br/>1 天快取]
+    Edge[Cloudflare Edge<br/>300+ PoP / 1 年快取]
+    Nginx[Origin nginx<br/>Lightsail]
+    FS[/usr/share/nginx/<br/>html/widget/]
+    Browser -- MISS --> Edge
+    Edge -- MISS --> Nginx
+    Nginx -- alias --> FS
+```
+
+HIT 最佳情況：瀏覽器即時載入（< 10ms）；冷啟動：CF edge → 台北 PoP TTFB < 60ms；極端情況：edge MISS 回源一次後，該地區 PoP 之後都 HIT。
+
+### 2.7.2 快取標頭設計
+
+Origin nginx 對 `/widget/*` 統一回傳：
+
+```http
+Cache-Control: public, max-age=86400, s-maxage=31536000, immutable
+Access-Control-Allow-Origin: *
+```
+
+| 指令 | 對象 | 意義 | 設計理由 |
+|------|------|------|---------|
+| `max-age=86400` | 瀏覽器 | 1 天後重新驗證 | 支援 bug 修復快速 rollout |
+| `s-maxage=31536000` | 共享 CDN | 1 年 | edge HIT rate 趨近 100%，origin 幾乎不回源 |
+| `immutable` | 瀏覽器 | TTL 內完全不重驗 | 省掉條件式 GET，減少 RTT |
+
+配合 Cloudflare Cache Rule 以 `Override origin → 1 year` 強制 edge TTL，Free plan 下也能確保 edge 真的存 1 年。
+
+### 2.7.3 CORS 與版本策略
+
+Widget 必須跨域載入，因此 `Access-Control-Allow-Origin: *`。這是**公開資源**，不含 secrets — tenant 識別於執行階段透過 `window.BAIYUAN_WIDGET.tenantKey` 傳遞。
+
+目前採「**無版號 URL + 短瀏覽器 TTL**」：
+
+- ✅ 優點：單一 URL 永久可用，客戶嵌入碼永不需改
+- ❌ 缺點：每次 bug 修復需等 1 天後客戶端才拿到
+- 🔄 升級路徑：未來改 `chat-widget.v{SEMVER}.js`，可拉長瀏覽器 TTL 至 1 年
+
+### 2.7.4 失效與 purge
+
+- **瀏覽器**：改 URL（加版號）→ 重新拉；或等 `max-age` 到期
+- **CF edge**：Dashboard → Caching → Purge Everything / Custom Purge（by URL）；或 API 自動化
+- **origin**：檔案放在 `/home/ubuntu/cs-widget/dist/`，nginx 以 `:ro` 掛載，`docker compose up -d --no-deps nginx` 熱載入
+
+### 2.7.5 實測性能
+
+| 指標 | 數值（台北 PoP，CF HIT） |
+|------|-------|
+| TTFB | < 60ms |
+| Total | < 70ms |
+| Origin 回源率 | < 0.1% |
+| Edge HIT 率 | > 99.9% |
+
+---
+
 ## 本章要點
 
 - 整個系統可以濃縮成：PG + pgvector + Redis + Node.js + L1/L2 Hybrid
@@ -206,6 +272,7 @@ flowchart TB
 - 所有表都有 `tenant_id` 並啟用 Postgres RLS，是多租戶安全的第一道防線
 - 三條產品線的 RAG 需求差異很大，但基礎設施完全共用是刻意設計
 - pgvector / RRF / Node.js 等選型都是折衷，Ch 12 會談何時該反悔
+- Widget JS 透過 origin nginx + Cloudflare edge 二層快取分發，TTFB < 60ms，origin 回源率 < 0.1%
 
 ## 參考資料
 
@@ -222,6 +289,7 @@ flowchart TB
 | 日期 | 版本 | 說明 |
 |------|------|------|
 | 2026-04-20 | v1.0 | 初稿 |
+| 2026-04-22 | v1.1 | 新增 §2.7 Widget 邊緣分發與快取策略（origin + CF edge 二層架構） |
 
 ---
 
