@@ -3,8 +3,9 @@ title: "Chapter 5 — L1→L2 Fallback & Token Economics"
 chapter: 5
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-20T09:10:35Z'
+last_modified_at: '2026-04-20T09:17:36Z'
 ---
+
 
 
 

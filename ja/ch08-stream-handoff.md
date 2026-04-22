@@ -3,8 +3,9 @@ title: "第 8 章 — ストリーミング応答と Handoff 閉ループ"
 chapter: 8
 lang: ja
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-20T09:10:35Z'
+last_modified_at: '2026-04-20T09:17:36Z'
 ---
+
 
 
 

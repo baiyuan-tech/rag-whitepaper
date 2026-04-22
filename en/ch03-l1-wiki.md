@@ -3,8 +3,9 @@ title: "Chapter 3 — L1 Wiki: DB-Cached Knowledge Compiler"
 chapter: 3
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-20T09:10:35Z'
+last_modified_at: '2026-04-20T09:17:36Z'
 ---
+
 
 
 
