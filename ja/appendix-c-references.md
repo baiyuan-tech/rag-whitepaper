@@ -2,8 +2,9 @@
 title: "付録 C — 参考文献"
 lang: ja
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-20T09:17:36Z'
+last_modified_at: '2026-04-22T03:40:36Z'
 ---
+
 
 
 
