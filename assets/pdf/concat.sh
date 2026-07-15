@@ -44,6 +44,8 @@ for f in "${FILES[@]}"; do
     /^<!--[[:space:]]*AI-friendly/ { inld=1; next }
     inld==1 && /^-->/ { inld=0; next }
     inld==1 { next }
+    /^\{% raw %\}[[:space:]]*$/ { next }
+    /^\{% endraw %\}[[:space:]]*$/ { next }
     /^<script type="application\/ld\+json">/ { inld=1; next }
     inld==1 && /^<\/script>/ { inld=0; next }
     inld==1 { next }

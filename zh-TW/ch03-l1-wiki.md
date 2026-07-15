@@ -148,6 +148,7 @@ async function compileWiki(kb: KnowledgeBase): Promise<CompileReport> {
 
 ### 3.3.1 Compile Prompt 範例（精簡版）
 
+{% raw %}
 ```text
 [SYSTEM]
 你是知識編譯員。你的工作是把多個原始文件片段（chunks）整合成一個結構化的 Wiki 頁。
@@ -166,6 +167,7 @@ async function compileWiki(kb: KnowledgeBase): Promise<CompileReport> {
 相關 chunks：
 {{chunks}}
 ```
+{% endraw %}
 
 ### 3.3.2 Chunks 選取策略
 
