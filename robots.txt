@@ -1,23 +1,92 @@
 User-agent: *
 Allow: /
 
-# AI crawlers — explicitly allow. This whitepaper is published for AI
-# indexing; we do NOT exclude GPTBot / ClaudeBot / PerplexityBot / etc.
+# ─── Global AI crawlers — explicitly allow 全球 AI 爬蟲（明示允許）───
+# This whitepaper is published FOR AI indexing; we do NOT exclude
+# GPTBot / ClaudeBot / PerplexityBot / etc.
 User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
 Allow: /
 User-agent: ClaudeBot
 Allow: /
-User-agent: PerplexityBot
+User-agent: Claude-User
 Allow: /
-User-agent: Google-Extended
-Allow: /
-User-agent: CCBot
+User-agent: Claude-SearchBot
 Allow: /
 User-agent: anthropic-ai
 Allow: /
-User-agent: Bytespider
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: GoogleOther
+Allow: /
+User-agent: CCBot
 Allow: /
 User-agent: Applebot-Extended
 Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: MistralAI-User
+Allow: /
+
+# ─── China / mainland AI + search crawlers — explicitly allow ───
+# ─── 中國大陸 AI 與搜尋引擎爬蟲（明示允許）───
+# 百度搜尋 + 文心一言 ERNIE
+User-agent: Baiduspider
+Allow: /
+User-agent: Baiduspider-render
+Allow: /
+User-agent: YiyanBot
+Allow: /
+# 字節跳動（豆包 Doubao / Coze / TikTok）
+User-agent: Bytespider
+Allow: /
+User-agent: TikTokSpider
+Allow: /
+# DeepSeek 深度求索
+User-agent: DeepSeekBot
+Allow: /
+# 月之暗面 Moonshot Kimi
+User-agent: Kimibot
+Allow: /
+User-agent: Kimi-User
+Allow: /
+User-agent: MoonshotBot
+Allow: /
+# 阿里巴巴 通義千問 Qwen + 夸克 AI 搜尋（神馬）
+User-agent: TongyiBot
+Allow: /
+User-agent: YisouSpider
+Allow: /
+# 騰訊 混元/元寶（經搜狗抓取）
+User-agent: Sogou web spider
+Allow: /
+User-agent: Sogou inst spider
+Allow: /
+# 智譜 GLM / ChatGLM
+User-agent: ChatGLM-Spider
+Allow: /
+# 360 搜尋 / 納米 AI 搜尋
+User-agent: 360Spider
+Allow: /
+User-agent: HaoSouSpider
+Allow: /
+# 華為 花瓣搜尋 / 小藝
+User-agent: PetalBot
+Allow: /
+# iAsk AI
+User-agent: iaskspider
+Allow: /
+User-agent: iAskBot
+Allow: /
+
+# AI-readable site index (llms.txt standard)
+# https://baiyuan-tech.github.io/rag-whitepaper/llms.txt
 
 Sitemap: https://baiyuan-tech.github.io/rag-whitepaper/sitemap.xml

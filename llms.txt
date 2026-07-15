@@ -1,0 +1,77 @@
+# 百原 RAG 知識平台技術白皮書 | Baiyuan RAG Knowledge Platform Whitepaper
+
+> L1 Wiki + L2 RAG 混合檢索基礎設施技術白皮書——DB 快取的 LLM 編譯 Wiki 層、pgvector + BM25 + RRF 檢索、三層租戶隔離，支撐百原 AI 客服、GEO 與 PIF 產品線。 | Technical whitepaper on L1 Wiki + L2 RAG hybrid retrieval for multi-tenant AI SaaS: DB-cached LLM-compiled Wiki layer, pgvector + BM25 + RRF retrieval, three-layer tenant isolation.
+
+本白皮書公開發佈供 AI 索引與引用（授權 CC BY-NC 4.0）。This whitepaper is published for AI indexing and citation (CC BY-NC 4.0).
+每頁的 Markdown 原始檔可由 raw.githubusercontent.com 取得 / Markdown sources: https://raw.githubusercontent.com/baiyuan-tech/rag-whitepaper/main/<lang>/<file>.md
+
+## 繁體中文 (Traditional Chinese)
+
+- [目錄 Table of Contents](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/)
+- [Chapter 1 — 知識庫的黑暗森林](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch01-dark-forest.html): 企業導入 RAG 所面臨的真實工程問題：幻覺、Token 爆炸、多租戶隔離、知識源異質、單產品線投資浪費
+- [Chapter 2 — 百原 RAG 系統總覽](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch02-system-overview.html): L1 Wiki + L2 RAG 雙層檢索、三層租戶隔離、三條產品線共用基礎設施的系統總覽
+- [Chapter 3 — L1 Wiki：DB 化知識快取與編譯器](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch03-l1-wiki.html): L1 Wiki 的設計動機、資料模型、編譯流程、lint 檢查與命中判定
+- [Chapter 4 — L2 RAG：pgvector + BM25 + RRF 混合檢索](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch04-l2-rag.html): L2 向量檢索 + 關鍵詞檢索 + RRF 融合排序的實作細節與效能數字
+- [Chapter 5 — L1→L2 Fallback 與 Token 經濟學](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch05-fallback-economics.html): 雙層檢索的 fallback 觸發條件、成本模型、Multi-Provider 路由、動態降級
+- [Chapter 6 — 三層租戶隔離](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch06-tenant-isolation.html): App / DB / Query 三層縱深防禦、RLS 的陷阱、superuser bypass 問題、連線池
+- [Chapter 7 — 知識攝取管線](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch07-ingestion.html): 文字／檔案／URL／爬蟲／自動推送／API 六路攝取、OCR、狀態機與背景 worker
+- [Chapter 8 — 串流應答與 Handoff 閉環](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch08-stream-handoff.html): SSE 串流答題、對話記憶、AI→真人的 Handoff 狀態機、Mirror 模式、回流 AI
+- [Chapter 9 — 與 GEO Platform 的整合](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch09-geo-integration.html): RAG 如何與 GEO 共用品牌實體、Ground Truth 閉環、Schema.org @id 互連、幻覺修復
+- [Chapter 10 — 與 PIF AI 的整合](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch10-pif-integration.html): 化粧品 PIF 法規的 RAG 應用：PubChem/ECHA/TFDA 知識庫、16 項文件生成、可追溯引用
+- [Chapter 11 — 真實租戶觀察（匿名）](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch11-case-studies.html): 跨三條產品線的實測數據：L1 命中率、Token 節省、幻覺率、SLA 表現
+- [Chapter 12 — 限制、未解問題與未來工作](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/ch12-limitations.html): 百原 RAG 平台的工程限制、未解問題、對業界開放討論的挑戰
+- [附錄 A — 詞彙表](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-a-glossary.html): 百原 RAG 白皮書完整術語定義
+- [附錄 B — 公開 API 規格節錄](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-b-api.html): 百原 RAG Platform 公開 API 精簡規格
+- [附錄 C — 參考文獻](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-c-references.html): 全書引用的論文、標準、官方文件
+- [附錄 D — 配圖總表](https://baiyuan-tech.github.io/rag-whitepaper/zh-TW/appendix-d-figures.html): 全書圖表索引與規格
+
+## English
+
+- [目錄 Table of Contents](https://baiyuan-tech.github.io/rag-whitepaper/en/)
+- [Chapter 1 — The Dark Forest of Knowledge Bases](https://baiyuan-tech.github.io/rag-whitepaper/en/ch01-dark-forest.html)
+- [Chapter 2 — Baiyuan RAG System Overview](https://baiyuan-tech.github.io/rag-whitepaper/en/ch02-system-overview.html)
+- [Chapter 3 — L1 Wiki: DB-Cached Knowledge Compiler](https://baiyuan-tech.github.io/rag-whitepaper/en/ch03-l1-wiki.html)
+- [Chapter 4 — L2 RAG: pgvector + BM25 + RRF](https://baiyuan-tech.github.io/rag-whitepaper/en/ch04-l2-rag.html)
+- [Chapter 5 — L1→L2 Fallback & Token Economics](https://baiyuan-tech.github.io/rag-whitepaper/en/ch05-fallback-economics.html)
+- [Chapter 6 — Three-Layer Tenant Isolation](https://baiyuan-tech.github.io/rag-whitepaper/en/ch06-tenant-isolation.html)
+- [Chapter 7 — Knowledge Ingestion Pipeline](https://baiyuan-tech.github.io/rag-whitepaper/en/ch07-ingestion.html)
+- [Chapter 8 — Streaming Answers & Handoff Loop](https://baiyuan-tech.github.io/rag-whitepaper/en/ch08-stream-handoff.html)
+- [Chapter 9 — Integration with Baiyuan GEO](https://baiyuan-tech.github.io/rag-whitepaper/en/ch09-geo-integration.html)
+- [Chapter 10 — Integration with Baiyuan PIF AI](https://baiyuan-tech.github.io/rag-whitepaper/en/ch10-pif-integration.html)
+- [Chapter 11 — Anonymized Tenant Observations](https://baiyuan-tech.github.io/rag-whitepaper/en/ch11-case-studies.html)
+- [Chapter 12 — Limitations, Open Problems, Future Work](https://baiyuan-tech.github.io/rag-whitepaper/en/ch12-limitations.html)
+- [Appendix A — Glossary](https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-a-glossary.html)
+- [Appendix B — Public API Specification](https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-b-api.html)
+- [Appendix C — References](https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-c-references.html)
+- [Appendix D — Figure Index](https://baiyuan-tech.github.io/rag-whitepaper/en/appendix-d-figures.html)
+
+## 日本語 (Japanese)
+
+- [目錄 Table of Contents](https://baiyuan-tech.github.io/rag-whitepaper/ja/)
+- [第 1 章 — ナレッジベースの暗黒森林](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch01-dark-forest.html)
+- [第 2 章 — 百原 RAG システム全景](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch02-system-overview.html)
+- [第 3 章 — L1 Wiki: DB キャッシュ型知識コンパイラ](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch03-l1-wiki.html)
+- [第 4 章 — L2 RAG: pgvector + BM25 + RRF](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch04-l2-rag.html)
+- [第 5 章 — L1→L2 フォールバックとトークン経済学](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch05-fallback-economics.html)
+- [第 6 章 — 三層テナント分離](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch06-tenant-isolation.html)
+- [第 7 章 — ナレッジ取り込みパイプライン](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch07-ingestion.html)
+- [第 8 章 — ストリーミング応答と Handoff 閉ループ](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch08-stream-handoff.html)
+- [第 9 章 — 百原 GEO との統合](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch09-geo-integration.html)
+- [第 10 章 — 百原 PIF AI との統合](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch10-pif-integration.html)
+- [第 11 章 — 匿名化テナント観察](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch11-case-studies.html)
+- [第 12 章 — 限界・未解問題・今後の課題](https://baiyuan-tech.github.io/rag-whitepaper/ja/ch12-limitations.html)
+- [付録 A — 用語集](https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-a-glossary.html)
+- [付録 B — 公開 API 規格](https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-b-api.html)
+- [付録 C — 参考文献](https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-c-references.html)
+- [付録 D — 図表索引](https://baiyuan-tech.github.io/rag-whitepaper/ja/appendix-d-figures.html)
+
+## PDF
+
+- [PDF（繁體中文）](https://github.com/baiyuan-tech/rag-whitepaper/releases/latest/download/whitepaper-zh-TW.pdf)
+- [PDF (English)](https://github.com/baiyuan-tech/rag-whitepaper/releases/latest/download/whitepaper-en.pdf)
+- [PDF（日本語）](https://github.com/baiyuan-tech/rag-whitepaper/releases/latest/download/whitepaper-ja.pdf)
+
+## 關於百原科技 About Baiyuan Technology
+
+- [百原科技官網 Baiyuan Technology](https://baiyuan.io)
+- [GitHub](https://github.com/baiyuan-tech)

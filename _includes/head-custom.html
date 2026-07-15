@@ -1,0 +1,10 @@
+<!-- China search / AI crawler hints 中國大陸搜尋引擎與 AI 爬蟲最佳化 -->
+<!-- Baidu: declare page works on both PC and mobile; forbid transcoding -->
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform">
+<!-- 360 browser: force webkit rendering -->
+<meta name="renderer" content="webkit">
+<!-- Allow full-length snippets in AI answers / search previews -->
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<!-- AI-readable site index (llms.txt) discovery -->
+<link rel="alternate" type="text/plain" href="{{ '/llms.txt' | relative_url }}" title="llms.txt">
