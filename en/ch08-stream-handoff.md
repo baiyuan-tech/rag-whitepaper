@@ -3,8 +3,9 @@ title: "Chapter 8 — Streaming Answers & Handoff Loop"
 chapter: 8
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-22T03:48:20Z'
+last_modified_at: '2026-07-15T03:58:34Z'
 ---
+
 
 
 
