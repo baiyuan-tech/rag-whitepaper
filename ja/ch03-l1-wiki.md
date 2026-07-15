@@ -3,8 +3,9 @@ title: "第 3 章 — L1 Wiki: DB キャッシュ型知識コンパイラ"
 chapter: 3
 lang: ja
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-22T03:40:36Z'
+last_modified_at: '2026-04-22T03:48:20Z'
 ---
+
 
 
 

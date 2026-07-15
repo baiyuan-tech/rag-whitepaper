@@ -3,8 +3,9 @@ title: "Chapter 11 — Anonymized Tenant Observations"
 chapter: 11
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-22T03:40:36Z'
+last_modified_at: '2026-04-22T03:48:20Z'
 ---
+
 
 
 

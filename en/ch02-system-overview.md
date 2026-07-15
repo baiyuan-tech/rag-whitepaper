@@ -3,8 +3,9 @@ title: "Chapter 2 — Baiyuan RAG System Overview"
 chapter: 2
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-04-22T03:40:36Z'
+last_modified_at: '2026-04-22T03:48:20Z'
 ---
+
 
 
 
