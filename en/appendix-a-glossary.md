@@ -2,8 +2,9 @@
 title: "Appendix A — Glossary"
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-07-15T04:02:34Z'
+last_modified_at: '2026-08-28T05:35:56Z'
 ---
+
 
 
 
