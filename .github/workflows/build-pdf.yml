@@ -139,11 +139,13 @@ jobs:
           retention-days: 90
           if-no-files-found: warn
 
-      - name: Attach PDF to v1.0-draft Release
+      - name: Attach PDF to Release
+        # Release-triggered: attach to that release's tag (dynamic)
+        # Main-branch push: keep syncing to v1.0-draft for iterative preview
         if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
         uses: softprops/action-gh-release@v3
         with:
-          tag_name: v1.0-draft
+          tag_name: ${{ github.event_name == 'release' && github.event.release.tag_name || 'v1.0-draft' }}
           files: whitepaper-zh-TW.pdf
           fail_on_unmatched_files: true
 
@@ -220,11 +222,13 @@ jobs:
           retention-days: 90
           if-no-files-found: warn
 
-      - name: Attach PDF to v1.0-draft Release
+      - name: Attach PDF to Release
+        # Release-triggered: attach to that release's tag (dynamic)
+        # Main-branch push: keep syncing to v1.0-draft for iterative preview
         if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
         uses: softprops/action-gh-release@v3
         with:
-          tag_name: v1.0-draft
+          tag_name: ${{ github.event_name == 'release' && github.event.release.tag_name || 'v1.0-draft' }}
           files: whitepaper-en.pdf
           fail_on_unmatched_files: true
 
@@ -306,10 +310,12 @@ jobs:
           retention-days: 90
           if-no-files-found: warn
 
-      - name: Attach PDF to v1.0-draft Release
+      - name: Attach PDF to Release
+        # Release-triggered: attach to that release's tag (dynamic)
+        # Main-branch push: keep syncing to v1.0-draft for iterative preview
         if: (github.event_name == 'release' || github.ref == 'refs/heads/main') && success()
         uses: softprops/action-gh-release@v3
         with:
-          tag_name: v1.0-draft
+          tag_name: ${{ github.event_name == 'release' && github.event.release.tag_name || 'v1.0-draft' }}
           files: whitepaper-ja.pdf
           fail_on_unmatched_files: true
