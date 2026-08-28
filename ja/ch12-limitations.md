@@ -3,8 +3,9 @@ title: "第 12 章 — 限界・未解問題・今後の課題"
 chapter: 12
 lang: ja
 license: CC-BY-NC-4.0
-last_modified_at: '2026-08-28T05:35:56Z'
+last_modified_at: '2026-08-28T05:40:40Z'
 ---
+
 
 
 

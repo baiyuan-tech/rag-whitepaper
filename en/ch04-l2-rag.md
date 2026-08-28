@@ -3,8 +3,9 @@ title: "Chapter 4 — L2 RAG: pgvector + BM25 + RRF"
 chapter: 4
 lang: en
 license: CC-BY-NC-4.0
-last_modified_at: '2026-08-28T05:35:56Z'
+last_modified_at: '2026-08-28T05:40:40Z'
 ---
+
 
 
 

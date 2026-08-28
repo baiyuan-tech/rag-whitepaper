@@ -3,8 +3,9 @@ title: "第 5 章 — L1→L2 フォールバックとトークン経済学"
 chapter: 5
 lang: ja
 license: CC-BY-NC-4.0
-last_modified_at: '2026-08-28T05:35:56Z'
+last_modified_at: '2026-08-28T05:40:40Z'
 ---
+
 
 
 
