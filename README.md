@@ -5,7 +5,7 @@
 > *A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS*
 
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
-[![Status: Draft](https://img.shields.io/badge/Status-Draft%20v1.0-yellow.svg)](#修訂記錄)
+[![Status: v1.0.0](https://img.shields.io/badge/Status-v1.0.0-blue.svg)](#修訂記錄)
 [![zh-TW](https://img.shields.io/badge/zh--TW-complete-green.svg)](zh-TW/)
 [![en](https://img.shields.io/badge/en-complete-green.svg)](en/)
 [![ja](https://img.shields.io/badge/ja-complete-green.svg)](ja/)

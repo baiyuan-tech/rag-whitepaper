@@ -17,8 +17,8 @@ authors:
     email: services@baiyuan.io
     affiliation: "Baiyuan Technology"
     website: https://baiyuan.io
-version: "1.0-draft"
-date-released: 2026-04-20
+version: "1.0.0"
+date-released: 2026-08-28
 url: "https://github.com/baiyuan-tech/rag-whitepaper"
 repository-code: "https://github.com/baiyuan-tech/rag-whitepaper"
 license: CC-BY-NC-4.0

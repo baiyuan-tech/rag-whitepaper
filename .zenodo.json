@@ -1,0 +1,69 @@
+{
+  "title": "Baiyuan RAG Knowledge Platform: A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS",
+  "description": "<p>A technical whitepaper documenting the engineering practice of building <strong>Baiyuan RAG Knowledge Platform</strong> (2024–2026), a multi-tenant knowledge retrieval infrastructure powering three Baiyuan product lines: <strong>Baiyuan AI Customer Service SaaS</strong>, <strong>Baiyuan GEO Platform</strong>, and <strong>Baiyuan PIF AI</strong> (Product Information File automation for cosmetics regulatory compliance).</p><p><strong>Coverage</strong>: two-layer retrieval architecture (<strong>L1 Wiki</strong> — database-cached compiled summaries via LLM Wiki compiler; <strong>L2 RAG</strong> — pgvector + BM25 + Reciprocal Rank Fusion hybrid retrieval), three-layer tenant isolation (PostgreSQL RLS + application-layer KB scoping + audit-log tables), streaming answers with tenant-aware chat gateway, human-operator handoff loop, deep integration patterns with Baiyuan GEO (brand-entity co-referencing, Schema.org interlinking) and Baiyuan PIF (regulatory vertical for cosmetics documentation under Taiwan Cosmetic Hygiene and Safety Act).</p><p><strong>v1.0.0 (this version)</strong>: initial stable release of 12 chapters + 4 appendices in three languages — Traditional Chinese (zh-TW, ~45,000 characters), English (en), and Japanese (ja) — covering Ch 1 The Dark Forest of Enterprise Knowledge, Ch 2 System Overview, Ch 3 L1 Wiki Compiler, Ch 4 L2 RAG Retrieval, Ch 5 Fallback Economics, Ch 6 Tenant Isolation, Ch 7 Ingestion Pipeline, Ch 8 Streaming &amp; Handoff, Ch 9 GEO Integration, Ch 10 PIF Integration, Ch 11 Case Studies, Ch 12 Limitations, plus Appendices A (Glossary), B (API), C (References), D (Figures).</p><p><strong>Languages</strong>: Traditional Chinese, English, and Japanese — all complete through chapter 12 + 4 appendices.</p><p><strong>License</strong>: Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).</p>",
+  "creators": [
+    {
+      "name": "Lin, Vincent",
+      "affiliation": "Baiyuan Technology",
+      "orcid": "0009-0004-8264-368X"
+    }
+  ],
+  "upload_type": "publication",
+  "publication_type": "report",
+  "publication_date": "2026-08-28",
+  "version": "1.0.0",
+  "language": "zho",
+  "keywords": [
+    "Retrieval Augmented Generation",
+    "RAG",
+    "L1 Wiki",
+    "L2 RAG",
+    "Hybrid Retrieval",
+    "pgvector",
+    "BM25",
+    "Reciprocal Rank Fusion",
+    "LLM Wiki Compiler",
+    "Multi-Tenant SaaS",
+    "PostgreSQL RLS",
+    "Row-Level Security",
+    "Knowledge Base",
+    "AI Customer Service",
+    "Streaming Answer",
+    "Human Handoff",
+    "10K-tenant readiness",
+    "Cross-Product Integration",
+    "GEO Platform",
+    "PIF AI",
+    "Cosmetics Regulatory",
+    "Single Source of Truth",
+    "BullMQ",
+    "Redis"
+  ],
+  "communities": [
+    { "identifier": "open-science" }
+  ],
+  "license": "CC-BY-NC-4.0",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/baiyuan-tech/geo-whitepaper",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/baiyuan-tech/pif-whitepaper",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://rag.baiyuan.io",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
+    }
+  ],
+  "references": [
+    "Lin, V. (2026). Baiyuan GEO Platform: A Whitepaper on Building a SaaS for Generative Engine Optimization. Baiyuan Technology. https://github.com/baiyuan-tech/geo-whitepaper",
+    "Lin, V. (2026). PIF AI: A Whitepaper on Multi-Tenant AI-Assisted Product Information File Documentation. Baiyuan Technology. https://github.com/baiyuan-tech/pif-whitepaper"
+  ],
+  "notes": "v1.0.0 initial stable release: 12 chapters + 4 appendices in Traditional Chinese, English, and Japanese covering the L1 Wiki + L2 RAG hybrid retrieval architecture powering Baiyuan's AI Customer Service SaaS, GEO Platform, and PIF AI product lines. Concept DOI (version-independent) is assigned by Zenodo on first release; version-specific DOI assigned per release."
+}
