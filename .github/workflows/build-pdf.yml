@@ -319,3 +319,41 @@ jobs:
           tag_name: ${{ github.event_name == 'release' && github.event.release.tag_name || 'v1.0-draft' }}
           files: whitepaper-ja.pdf
           fail_on_unmatched_files: true
+
+  # ── Zenodo 存放(release 時才跑)───────────────────────────────────────
+  # 等三個語系 job 都完成才跑一次 —— 若把存放塞進各語系 job,會建出三個 Zenodo 版本。
+  # ⚠ 前提:GitHub↔Zenodo webhook 必須關閉(Zenodo → Applications → GitHub)。
+  # 否則會產生 2 筆 record(webhook ZIP-only + 本 script 帶 PDF),且若 webhook 較晚
+  # 完成,concept DOI 會指向那筆沒 PDF 的,等於白做(Google Scholar 抓不到全文)。
+  # 修法對齊 GEO whitepaper `assets/pdf/zenodo_deposit.py` 慣例。
+  zenodo:
+    name: Deposit PDFs to Zenodo
+    needs: [build-zh-TW, build-en, build-ja]
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download built PDFs
+        uses: actions/download-artifact@v7
+        with:
+          pattern: whitepaper-*
+          merge-multiple: true
+
+      - name: Deposit to Zenodo
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+          ZENODO_CONCEPT: ${{ vars.ZENODO_CONCEPT }}
+        run: |
+          set -eo pipefail
+          if [ -z "$ZENODO_TOKEN" ]; then
+            echo "FATAL: 缺 secrets.ZENODO_TOKEN" >&2; exit 1
+          fi
+          if [ -z "$ZENODO_CONCEPT" ]; then
+            echo "FATAL: 缺 vars.ZENODO_CONCEPT(concept record id,非 DOI 字串)" >&2; exit 1
+          fi
+          VER="${{ github.event.release.tag_name }}"
+          VER="${VER#v}"
+          ls -la whitepaper-*.pdf
+          python3 assets/pdf/zenodo_deposit.py --version "$VER" --files whitepaper-*.pdf
