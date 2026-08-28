@@ -9,6 +9,7 @@
 [![zh-TW](https://img.shields.io/badge/zh--TW-complete-green.svg)](zh-TW/)
 [![en](https://img.shields.io/badge/en-complete-green.svg)](en/)
 [![ja](https://img.shields.io/badge/ja-complete-green.svg)](ja/)
+[![PDF](https://img.shields.io/badge/PDF-download-red.svg)](https://github.com/baiyuan-tech/rag-whitepaper/releases/latest)
 
 > **English reader?** → Start with **[en/README.md](en/README.md)** or jump to **[Ch 1 (en)](en/ch01-dark-forest.md)**.
 >
