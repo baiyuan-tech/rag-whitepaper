@@ -40,7 +40,9 @@
     "Redis"
   ],
   "communities": [
-    { "identifier": "open-science" }
+    {
+      "identifier": "open-science"
+    }
   ],
   "license": "CC-BY-NC-4.0",
   "access_right": "open",
@@ -59,6 +61,16 @@
       "identifier": "https://rag.baiyuan.io",
       "relation": "isDocumentedBy",
       "resource_type": "other"
+    },
+    {
+      "identifier": "10.5281/zenodo.19994035",
+      "relation": "references",
+      "resource_type": "publication-report"
+    },
+    {
+      "identifier": "10.5281/zenodo.19994787",
+      "relation": "references",
+      "resource_type": "publication-report"
     }
   ],
   "references": [
