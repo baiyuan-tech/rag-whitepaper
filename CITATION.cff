@@ -49,6 +49,9 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.22139574"
     description: "Version DOI (v1.0.1)"
+  - type: doi
+    value: "10.5281/zenodo.22663343"
+    description: "Version DOI (v1.0.2 — current)"
   - type: url
     value: "https://github.com/baiyuan-tech/rag-whitepaper"
     description: "GitHub repository"
