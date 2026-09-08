@@ -1,8 +1,9 @@
 ---
-title: "Baiyuan RAG Knowledge Platform Whitepaper"
-subtitle: "L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS"
+title: "Baiyuan RAG Knowledge Platform: A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS"
+subtitle: "Technical Whitepaper"
 author: "Vincent Lin (Baiyuan Technology)"
-date: "2026-04-20"
+classoption: [notitlepage]   # Google Scholar: title, authors and abstract on the first page
+date: "2026-09-08"
 lang: en
 abstract: |
   This whitepaper documents Baiyuan Technology's engineering practice

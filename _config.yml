@@ -8,6 +8,18 @@ description: >-
   deep integration with Baiyuan GEO Platform and PIF AI.
 url: "https://baiyuan-tech.github.io"
 baseurl: "/rag-whitepaper"
+
+# Google Scholar bibliographic metadata, emitted as <meta name="citation_*"> on the
+# index page by _includes/head-custom.html. Keep version/date in sync with CITATION.cff
+# on every release. pdf_url is the stable "latest release" redirect (always the newest PDF).
+citation:
+  title: "Baiyuan RAG Knowledge Platform: A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS"
+  author: "Lin, Vincent"
+  institution: "Baiyuan Technology"
+  date: "2026/09/08"
+  version: "1.0.2"
+  doi: "10.5281/zenodo.22138951"
+  pdf_url: "https://github.com/baiyuan-tech/rag-whitepaper/releases/latest/download/whitepaper-en.pdf"
 lang: zh-TW
 
 author:

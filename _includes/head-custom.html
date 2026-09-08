@@ -8,3 +8,17 @@
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
 <!-- AI-readable site index (llms.txt) discovery -->
 <link rel="alternate" type="text/plain" href="{{ '/llms.txt' | relative_url }}" title="llms.txt">
+
+<!-- Google Scholar bibliographic metadata (index page only; values in _config.yml `citation:`) -->
+{% if page.url == "/" %}
+<meta name="citation_title" content="{{ site.citation.title }}">
+<meta name="citation_author" content="{{ site.citation.author }}">
+<meta name="citation_author_institution" content="{{ site.citation.institution }}">
+<meta name="citation_publication_date" content="{{ site.citation.date }}">
+<meta name="citation_technical_report_institution" content="{{ site.citation.institution }}">
+<meta name="citation_technical_report_number" content="v{{ site.citation.version }}">
+<meta name="citation_doi" content="{{ site.citation.doi }}">
+<meta name="citation_pdf_url" content="{{ site.citation.pdf_url }}">
+<meta name="citation_abstract_html_url" content="{{ site.url }}{{ site.baseurl }}/">
+<meta name="citation_language" content="en">
+{% endif %}

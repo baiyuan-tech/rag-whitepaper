@@ -2,7 +2,8 @@
 title: "百原 RAG 知識庫平台 技術白皮書"
 subtitle: "多租戶 AI SaaS 的 L1 Wiki + L2 RAG 雙層檢索工程實踐"
 author: "Vincent Lin（百原科技）"
-date: "2026-04-20"
+classoption: [notitlepage]   # Google Scholar: title, authors and abstract on the first page
+date: "2026-09-08"
 lang: zh-Hant-TW
 toc-title: "目錄"
 abstract-title: "摘要"

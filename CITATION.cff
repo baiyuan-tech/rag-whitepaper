@@ -10,18 +10,19 @@ abstract: >-
   Platform and PIF AI (Product Information File automation for cosmetics
   regulatory compliance), three-layer tenant isolation, and a streaming
   handoff protocol. Published in Traditional Chinese, English, and Japanese.
-type: software
+type: report
 authors:
   - family-names: Lin
     given-names: Vincent
     email: services@baiyuan.io
     affiliation: "Baiyuan Technology"
     website: https://baiyuan.io
-version: "1.0.0"
-date-released: 2026-08-28
+version: "1.0.2"
+date-released: "2026-09-08"
 url: "https://github.com/baiyuan-tech/rag-whitepaper"
 repository-code: "https://github.com/baiyuan-tech/rag-whitepaper"
 license: CC-BY-NC-4.0
+doi: "10.5281/zenodo.22138951"
 keywords:
   - RAG
   - Retrieval Augmented Generation
@@ -42,6 +43,12 @@ keywords:
   - PIF
   - AI Customer Service
 identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22138951"
+    description: "Concept DOI (version-independent, always resolves to latest version)"
+  - type: doi
+    value: "10.5281/zenodo.22139574"
+    description: "Version DOI (v1.0.1)"
   - type: url
     value: "https://github.com/baiyuan-tech/rag-whitepaper"
     description: "GitHub repository"
@@ -55,7 +62,7 @@ identifiers:
     value: "https://pif.baiyuan.io"
     description: "Sister product — PIF AI"
 preferred-citation:
-  type: generic
+  type: report
   title: "Baiyuan RAG Knowledge Platform: A Whitepaper on L1 Wiki + L2 RAG Hybrid Retrieval for Multi-Tenant AI SaaS"
   authors:
     - family-names: Lin
@@ -65,6 +72,7 @@ preferred-citation:
     name: "Baiyuan Technology"
     website: "https://baiyuan.io"
   year: 2026
-  month: 4
-  url: "https://github.com/baiyuan-tech/rag-whitepaper"
-  version: "1.0-draft"
+  month: 9
+  url: "https://doi.org/10.5281/zenodo.22138951"
+  doi: "10.5281/zenodo.22138951"
+  version: "1.0.2"

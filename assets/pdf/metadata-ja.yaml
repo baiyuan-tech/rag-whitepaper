@@ -2,7 +2,8 @@
 title: "百原 RAG ナレッジプラットフォーム 技術ホワイトペーパー"
 subtitle: "マルチテナント AI SaaS のための L1 Wiki + L2 RAG 混合検索"
 author: "Vincent Lin（百原科技）"
-date: "2026-04-20"
+classoption: [notitlepage]   # Google Scholar: title, authors and abstract on the first page
+date: "2026-09-08"
 lang: ja
 toc-title: "目次"
 abstract-title: "概要"
