@@ -19,6 +19,15 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      deposit_tag:
+        description: "把這個已發佈 release 的 PDF 存進 Zenodo(例 v0.5.0;留空 = 只建 PDF 不存放)"
+        required: false
+        default: ""
+      diagnose:
+        description: "true = 只讀診斷 Zenodo token / 草稿 / newversion,不上傳不發佈"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -326,22 +335,49 @@ jobs:
   # 否則會產生 2 筆 record(webhook ZIP-only + 本 script 帶 PDF),且若 webhook 較晚
   # 完成,concept DOI 會指向那筆沒 PDF 的,等於白做(Google Scholar 抓不到全文)。
   # 修法對齊 GEO whitepaper `assets/pdf/zenodo_deposit.py` 慣例。
+  # ── Zenodo 存放(release 時才跑)───────────────────────────────────────
+  # 獨立於 build matrix:matrix 每個語系跑一次,若把存放塞進去會建出多個
+  # Zenodo 版本。這個 job 等所有語系都建完,只做一次存放。
+  #
+  # ⚠ 前提:GitHub↔Zenodo webhook 必須關閉(Zenodo → Applications → GitHub)。
+  # 兩者並存會讓每次發版產生兩筆記錄(webhook 的 ZIP-only + 本 job 的 PDF 版),
+  # 且 webhook 若較晚完成,concept DOI 會指向沒有 PDF 的那筆 —— 等於白做。
   zenodo:
     name: Deposit PDFs to Zenodo
     needs: [build-zh-TW, build-en, build-ja]
-    if: github.event_name == 'release'
+    # release 事件自動存放;workflow_dispatch 帶 deposit_tag 可對「已發佈但存放失敗」的 release 重跑
+    # (2026-08-30 v0.5.0:PDF 已掛上 release,Zenodo newversion 卻 403 —— 不必為了重存放再發一版)。
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.deposit_tag != '')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Download built PDFs
+      - name: Download built PDFs (release event)
+        if: github.event_name == 'release'
         uses: actions/download-artifact@v7
         with:
           pattern: whitepaper-*
           merge-multiple: true
 
+      - name: Download PDFs from the named release (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eo pipefail
+          gh release download "${{ github.event.inputs.deposit_tag }}" -R "${{ github.repository }}" -p 'whitepaper-*.pdf' --clobber
+          ls -la whitepaper-*.pdf
+
+      - name: Diagnose Zenodo (read-only)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.diagnose == 'true'
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+          ZENODO_CONCEPT: ${{ vars.ZENODO_CONCEPT }}
+        run: python3 assets/pdf/zenodo_deposit.py --diagnose --version probe
+
       - name: Deposit to Zenodo
+        if: github.event_name == 'release' || github.event.inputs.diagnose != 'true'
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
           ZENODO_CONCEPT: ${{ vars.ZENODO_CONCEPT }}
@@ -353,7 +389,11 @@ jobs:
           if [ -z "$ZENODO_CONCEPT" ]; then
             echo "FATAL: 缺 vars.ZENODO_CONCEPT(concept record id,非 DOI 字串)" >&2; exit 1
           fi
-          VER="${{ github.event.release.tag_name }}"
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VER="${{ github.event.release.tag_name }}"
+          else
+            VER="${{ github.event.inputs.deposit_tag }}"
+          fi
           VER="${VER#v}"
           ls -la whitepaper-*.pdf
           python3 assets/pdf/zenodo_deposit.py --version "$VER" --files whitepaper-*.pdf
